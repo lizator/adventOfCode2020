@@ -1,12 +1,21 @@
 
-mx = 0
+
+ls = []
+
 for i in range(875):
     line = input()
-    res = 0
-    for j in range(7):
-        if line[j] == 'B':
-            res += 2 ** (10 - j)
-    if res > mx:
-        mx = res
+    res = ""
+    for j in range(10):
+        if line[j] == 'B' or line[j] == 'R':
+            res += "1"
+        else:
+            res += "0"
+    tmp = int(res, 2)
+    ls.append(tmp)
 
-print(mx)
+ls.sort()
+for i in range(len(ls)):
+    if ls[i] == ls[i+1] - 2:
+        print(ls[i]+1)
+        break
+
