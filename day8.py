@@ -68,5 +68,4 @@ while True:
             commands[pc][0] = acc
             pc += currCom[1]
 
-print(found)
 print(acc)
