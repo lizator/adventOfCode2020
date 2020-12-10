@@ -17,6 +17,8 @@ for i in range(len(ls) - 1):
         possible = ls[i + 1 + j]
         if curr >= possible - 3:  # able to go to it
             mapp[possible] += mapp[curr]
+        else:
+            break
 
 print(mapp[ls[len(ls) - 1]])
 
