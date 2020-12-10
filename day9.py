@@ -55,4 +55,3 @@ while True:
 counter = len(al) - 2
 while counter != -1 and not cont(res, counter):
     counter -= 1
-
