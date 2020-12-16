@@ -1,14 +1,7 @@
 line = input()
 valids = []
-depatureRelated = []
 
 while line != "":
-    name = line.split(": ")[1].split(" ")
-    if name[0] == "departure":
-        depatureRelated.append(True)
-    else:
-        depatureRelated.append(False)
-
     line = line.split(": ")[1].split(" or ")
     curr = []
     for c in line:
@@ -49,12 +42,15 @@ while near != "":
 
     near = input()
 
+timesPossible = {}
 ordering = []
+endResult = []
 for i in range(len(outerList[0])):
-    ordering.append(-1)
+    endResult.append(-1)
+    ordering.append([])
+    timesPossible[i] = 0
 
 for i in range(len(outerList[0])):
-    print(ordering)
     possible = outerList[0][i]
     for j in range(len(outerList) - 1):
         k = j + 1
@@ -65,9 +61,29 @@ for i in range(len(outerList[0])):
 
     for n in range(len(possible)):
         if possible[n]:
-            ordering[n] = i
+            ordering[n].append(i)
+            timesPossible[i] += 1
 
-print(ordering)
+while len(timesPossible.keys()) > 0:
+    for key in timesPossible.keys():
+        found = False
+        if timesPossible[key] == 1:
+            for i in range(len(ordering)):
+                if key in ordering[i]:
+                    found = True
+                    endResult[i] = key
+                    for possible in ordering[i]:
+                        timesPossible[possible] -= 1
+                    timesPossible.pop(key)
+                    ordering[i].clear()
+        if found:
+            break
+
+res = 1
+for i in range(6):
+    res *= int(myTicket[endResult[i]])
+
+print(res)
 
 
 
